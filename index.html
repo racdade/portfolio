@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adolfo Brito | Diseño y desarrollo web</title>
+  <meta name="description" content="Adolfo Brito diseña y construye webs para negocios: landings, tiendas online y apps. Mira cuatro proyectos reales y escríbele.">
+  <meta property="og:title" content="Adolfo Brito | Diseño y desarrollo web">
+  <meta property="og:description" content="Webs para negocios que necesitan verse bien y recibir clientes.">
+  <meta property="og:image" content="img/llankia-desktop.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #EEF0F3;
+      --ink: #191C22;
+      --muted: #5E6573;
+      --line: #D3D7DE;
+      --cobalt: #2340E6;
+      --frame: #FFFFFF;
+      --display: "Bricolage Grotesque", system-ui, sans-serif;
+      --body: "Instrument Sans", system-ui, sans-serif;
+      --gutter: clamp(16px, 5vw, 72px);
+      --max: 1240px;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --paper: #15181D;
+        --ink: #E9ECF1;
+        --muted: #9AA2B0;
+        --line: #2C313A;
+        --cobalt: #8C9CFF;
+        --frame: #20242B;
+      }
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--body);
+      font-size: 1.0625rem;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; height: auto; }
+    a { color: inherit; }
+    :focus-visible { outline: 3px solid var(--cobalt); outline-offset: 4px; border-radius: 4px; }
+
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
+
+    /* Cabecera */
+    .top {
+      display: flex; justify-content: space-between; align-items: center;
+      padding-top: 28px; padding-bottom: 28px;
+    }
+    .top .name { font-family: var(--display); font-weight: 600; font-size: 1.125rem; text-decoration: none; }
+    .top nav { display: flex; gap: 28px; }
+    .top nav a { text-decoration: none; color: var(--muted); }
+    .top nav a:hover { color: var(--ink); }
+
+    /* Portada */
+    .hero { padding-top: clamp(32px, 5vw, 64px); padding-bottom: clamp(56px, 8vw, 112px); }
+    .hero h1 {
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: clamp(2.25rem, 4.6vw, 3.75rem);
+      line-height: 1.04;
+      letter-spacing: -0.025em;
+      max-width: 21ch;
+      margin: 0 0 24px;
+    }
+    .hero .lead { color: var(--muted); max-width: 46ch; margin: 0; font-size: 1.1875rem; }
+
+    .index {
+      display: grid;
+      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+      gap: clamp(24px, 4vw, 64px);
+      align-items: center;
+      margin-top: clamp(40px, 5vw, 64px);
+      border-top: 1px solid var(--line);
+      padding-top: 32px;
+    }
+    .index ul { list-style: none; margin: 0; padding: 0; }
+    .index li a {
+      display: block;
+      text-decoration: none;
+      padding: 10px 0;
+      color: var(--muted);
+      transition: color .2s;
+    }
+    .index li a .t {
+      display: block;
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      line-height: .95;
+      letter-spacing: -0.035em;
+    }
+    .index li a .d { display: block; font-size: .9375rem; margin-top: 6px; }
+    .index li a.on, .index li a:hover, .index li a:focus-visible { color: var(--ink); }
+
+    .preview {
+      position: relative;
+      aspect-ratio: 1440 / 900;
+      border-radius: 10px;
+      overflow: hidden;
+      background: var(--frame);
+      border: 1px solid var(--line);
+    }
+    .preview img {
+      position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+      opacity: 0; transition: opacity .35s ease;
+    }
+    .preview img.on { opacity: 1; }
+    @media (prefers-reduced-motion: reduce) { .preview img { transition: none; } }
+
+    .hero .cta {
+      display: inline-block;
+      margin-top: 28px;
+      padding: 14px 24px;
+      border-radius: 999px;
+      background: var(--ink);
+      color: var(--paper);
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .hero .cta:hover { background: var(--cobalt); color: #fff; }
+
+    /* Proyectos */
+    .project {
+      display: grid;
+      grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+      gap: clamp(28px, 5vw, 80px);
+      padding-top: clamp(56px, 8vw, 120px);
+      padding-bottom: clamp(56px, 8vw, 120px);
+      border-top: 1px solid var(--line);
+      scroll-margin-top: 16px;
+    }
+    .project h2 {
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: clamp(2rem, 4vw, 3.25rem);
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin: 0 0 8px;
+    }
+    .project .kind { color: var(--muted); margin: 0 0 24px; }
+    .project p { margin: 0 0 16px; max-width: 42ch; }
+    .project .visit {
+      display: inline-block;
+      margin-top: 12px;
+      color: var(--cobalt);
+      font-weight: 600;
+      text-underline-offset: 4px;
+    }
+
+    .shots { position: relative; padding-bottom: 8%; padding-right: 9%; }
+    .shot {
+      margin: 0;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: var(--frame);
+    }
+    .phone {
+      position: absolute;
+      right: 0; bottom: 0;
+      width: 24%;
+      margin: 0;
+      border-radius: 22px;
+      overflow: hidden;
+      border: 6px solid var(--ink);
+      background: var(--ink);
+      box-shadow: 0 24px 48px -20px rgba(15, 20, 35, .45);
+    }
+    .phone img { aspect-ratio: 390 / 844; object-fit: cover; object-position: top; width: 100%; }
+
+    /* Sobre mí y contacto */
+    .about {
+      display: grid;
+      grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+      gap: clamp(28px, 5vw, 80px);
+      padding-top: clamp(56px, 8vw, 120px);
+      padding-bottom: clamp(56px, 8vw, 120px);
+      border-top: 1px solid var(--line);
+    }
+    .about h2, .contact h2 {
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: clamp(1.75rem, 3vw, 2.25rem);
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin: 0;
+    }
+    .about .text p { margin: 0 0 16px; max-width: 58ch; }
+    .about ul { margin: 8px 0 0; padding-left: 1.1em; max-width: 58ch; }
+    .about li { margin-bottom: 6px; }
+
+    .contact {
+      background: var(--ink);
+      color: var(--paper);
+      padding-top: clamp(64px, 9vw, 128px);
+      padding-bottom: clamp(48px, 6vw, 80px);
+    }
+    .contact p { color: color-mix(in srgb, var(--paper) 70%, transparent); max-width: 48ch; margin: 16px 0 40px; }
+    .contact .mail {
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: clamp(1.6rem, 5.5vw, 4.5rem);
+      letter-spacing: -0.035em;
+      line-height: 1;
+      text-decoration: none;
+      overflow-wrap: anywhere;
+      border-bottom: 3px solid currentColor;
+    }
+    .contact .alt { margin: 28px 0 0; }
+    .contact .alt.ig { margin-top: 8px; }
+    .contact .alt a { color: var(--paper); text-underline-offset: 4px; }
+    .contact .mail:hover { color: color-mix(in srgb, var(--paper) 75%, var(--cobalt)); }
+    .contact :focus-visible { outline-color: var(--paper); }
+    .foot {
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+      margin-top: clamp(64px, 9vw, 120px);
+      padding-top: 24px;
+      border-top: 1px solid color-mix(in srgb, var(--paper) 18%, transparent);
+      font-size: .875rem;
+      color: color-mix(in srgb, var(--paper) 60%, transparent);
+    }
+
+    @media (max-width: 820px) {
+      .top nav { gap: 18px; }
+      .top nav .hide-sm { display: none; }
+      .index { grid-template-columns: 1fr; }
+      .preview { display: none; }
+      .index li a { color: var(--ink); border-bottom: 1px solid var(--line); padding: 16px 0; }
+      .project, .about { grid-template-columns: 1fr; }
+      .phone { border-width: 4px; border-radius: 16px; width: 26%; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="wrap top">
+    <a class="name" href="#">Adolfo Brito</a>
+    <nav aria-label="Principal">
+      <a href="#trabajo">Trabajo</a>
+      <a class="hide-sm" href="#sobre-mi">Sobre mí</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="wrap hero">
+      <h1>Hago webs para negocios que quieren verse bien y recibir clientes.</h1>
+      <p class="lead">Diseño y programo landings, tiendas online y apps desde Miraflores, Lima. Aquí tienes cuatro que hice desde cero y ya están funcionando.</p>
+      <a class="cta" href="https://wa.me/51947994089?text=Hola%20Adolfo%2C%20vi%20tu%20portfolio%20y%20quiero%20una%20web%20para%20mi%20negocio." target="_blank" rel="noopener">Escríbeme por WhatsApp</a>
+
+      <div class="index" id="trabajo">
+        <ul>
+          <li><a href="#llankia" data-shot="llankia" class="on"><span class="t">Llankia</span><span class="d">App para registrar horas y horas extra</span></a></li>
+          <li><a href="#core" data-shot="core"><span class="t">Core</span><span class="d">Web de un consultorio dental en Surquillo</span></a></li>
+          <li><a href="#jefacorp" data-shot="jefacorp"><span class="t">JefaCorp</span><span class="d">Landing de una agencia de estrategia digital</span></a></li>
+          <li><a href="#nexo" data-shot="nexo"><span class="t">Nexo</span><span class="d">Tienda online de ropa urbana</span></a></li>
+        </ul>
+        <div class="preview" aria-hidden="true">
+          <img src="img/llankia-desktop.jpg" alt="" data-shot="llankia" class="on" width="1440" height="900">
+          <img src="img/core-desktop.jpg" alt="" data-shot="core" width="1440" height="900">
+          <img src="img/jefacorp-desktop.jpg" alt="" data-shot="jefacorp" width="1440" height="900">
+          <img src="img/nexo-desktop.jpg" alt="" data-shot="nexo" width="1440" height="900">
+        </div>
+      </div>
+    </section>
+
+    <div class="wrap">
+      <article class="project" id="llankia">
+        <div>
+          <h2>Llankia</h2>
+          <p class="kind">Proyecto propio. App web en español e inglés</p>
+          <p>La hice porque quería una forma simple de anotar mis horas de trabajo y saber cuántas extras llevo en la semana, sin hojas de cálculo.</p>
+          <p>La página explica en pocos segundos qué hace la app y lleva directo a empezar gratis.</p>
+          <a class="visit" href="https://llankia.com/" target="_blank" rel="noopener">Ver llankia.com</a>
+        </div>
+        <div class="shots">
+          <figure class="shot"><img src="img/llankia-desktop.jpg" alt="Portada de Llankia en computadora: “Tus horas, claras.” con un resumen semanal de horas" width="1440" height="900" loading="lazy"></figure>
+          <figure class="phone"><img src="img/llankia-movil.jpg" alt="Llankia en celular" width="780" height="1688" loading="lazy"></figure>
+        </div>
+      </article>
+
+      <article class="project" id="core">
+        <div>
+          <h2>Core</h2>
+          <p class="kind">Consultorio dental en Surquillo, Lima</p>
+          <p>Una web pensada para que el paciente entienda los tratamientos, vea dónde queda el consultorio y saque cita por WhatsApp con un toque.</p>
+          <p>Muestra si está abierto o cerrado en ese momento, para que nadie llame en vano.</p>
+          <a class="visit" href="https://core-dental-surquillo.vercel.app/" target="_blank" rel="noopener">Ver la web de Core</a>
+        </div>
+        <div class="shots">
+          <figure class="shot"><img src="img/core-desktop.jpg" alt="Portada de Core en computadora: “Tratamientos dentales explicados con calma, en Surquillo.”" width="1440" height="900" loading="lazy"></figure>
+          <figure class="phone"><img src="img/core-movil.jpg" alt="Core en celular" width="780" height="1688" loading="lazy"></figure>
+        </div>
+      </article>
+
+      <article class="project" id="jefacorp">
+        <div>
+          <h2>JefaCorp</h2>
+          <p class="kind">Agencia de estrategia digital</p>
+          <p>Una landing con mucha actitud para una agencia que trabaja con dueños de negocio que ya facturan y quieren crecer en redes.</p>
+          <p>Todo apunta a una sola acción: agendar una llamada.</p>
+          <a class="visit" href="https://jefacorp-landing.vercel.app/" target="_blank" rel="noopener">Ver la web de JefaCorp</a>
+        </div>
+        <div class="shots">
+          <figure class="shot"><img src="img/jefacorp-desktop.jpg" alt="Portada de JefaCorp en computadora: “Despídete de lo que no te ha funcionado.”" width="1440" height="900" loading="lazy"></figure>
+          <figure class="phone"><img src="img/jefacorp-movil.jpg" alt="JefaCorp en celular" width="780" height="1688" loading="lazy"></figure>
+        </div>
+      </article>
+
+      <article class="project" id="nexo">
+        <div>
+          <h2>Nexo</h2>
+          <p class="kind">Tienda online de streetwear</p>
+          <p>Una tienda para una marca de ropa urbana con colecciones cortas: fotos grandes, precios a la vista y el carrito siempre a mano.</p>
+          <p>En celular se compra igual de fácil que en computadora.</p>
+          <a class="visit" href="https://nexo-store-delta.vercel.app/" target="_blank" rel="noopener">Ver la tienda Nexo</a>
+        </div>
+        <div class="shots">
+          <figure class="shot"><img src="img/nexo-desktop.jpg" alt="Portada de la tienda Nexo en computadora" width="1440" height="900" loading="lazy"></figure>
+          <figure class="phone"><img src="img/nexo-movil.jpg" alt="Nexo en celular: “Streetwear para los que no piden permiso”" width="780" height="1688" loading="lazy"></figure>
+        </div>
+      </article>
+
+      <section class="about" id="sobre-mi">
+        <h2>Sobre mí</h2>
+        <div class="text">
+          <p>Soy Adolfo Brito, venezolano, y vivo en Lima desde hace 9 años. Hoy me dedico a tiempo completo a hacer webs para negocios, como emprendedor.</p>
+          <p>Me encargo de todo, de principio a fin: entiendo qué vende tu negocio, ordeno y escribo el contenido, la diseño, la programo y la dejo publicada y funcionando. Las cuatro webs de arriba las hice así, desde cero.</p>
+          <p>Lo que puedes esperar si trabajamos juntos:</p>
+          <ul>
+            <li>Una web que se ve bien en celular, que es donde la va a ver la mayoría de tus clientes.</li>
+            <li>Textos claros que dicen qué haces y cómo contactarte.</li>
+            <li>Botones que llevan a una acción concreta: escribir por WhatsApp, agendar o comprar.</li>
+          </ul>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="contact" id="contacto">
+    <div class="wrap">
+      <h2>¿Necesitas una web?</h2>
+      <p>Cuéntame qué hace tu negocio y qué quieres lograr. Te respondo con una idea de cómo la haría y cuánto costaría.</p>
+      <a class="mail" href="https://wa.me/51947994089?text=Hola%20Adolfo%2C%20vi%20tu%20portfolio%20y%20quiero%20una%20web%20para%20mi%20negocio." target="_blank" rel="noopener">WhatsApp +51 947 994 089</a>
+      <p class="alt">O si prefieres, por correo: <a href="mailto:britoadolfo9@gmail.com">britoadolfo9@gmail.com</a></p>
+      <p class="alt ig">Instagram: <a href="https://www.instagram.com/racdade/" target="_blank" rel="noopener">@racdade</a></p>
+      <div class="foot">
+        <span>Adolfo Brito, Miraflores, Lima</span>
+        <span>© 2026</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Cambia la vista previa de la portada al pasar el mouse o el teclado por cada proyecto
+    const links = document.querySelectorAll('.index a[data-shot]');
+    const imgs = document.querySelectorAll('.preview img');
+    function show(name) {
+      links.forEach(a => a.classList.toggle('on', a.dataset.shot === name));
+      imgs.forEach(i => i.classList.toggle('on', i.dataset.shot === name));
+    }
+    links.forEach(a => {
+      a.addEventListener('mouseenter', () => show(a.dataset.shot));
+      a.addEventListener('focus', () => show(a.dataset.shot));
+    });
+  </script>
+</body>
+</html>
